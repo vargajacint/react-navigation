@@ -347,6 +347,24 @@ type BottomTabNativeOptions = {
   }) => React.ReactNode;
 
   /**
+   * Function which is called when the placement of the accessory view changes,
+   * e.g. when the tab bar minimizes and the accessory moves inline with it.
+   *
+   * Receives the same `placement` values that are passed to `bottomAccessory`.
+   * Since the accessory is rendered for both placements at the same time, this
+   * is the only way to tell which one is currently visible.
+   *
+   * Available starting from iOS 26.
+   *
+   * Only supported with `native` implementation.
+   *
+   * @platform ios
+   */
+  onBottomAccessoryPlacementChange?: (options: {
+    placement: 'regular' | 'inline';
+  }) => void;
+
+  /**
    * Specifies whether `contentInsetAdjustmentBehavior` of the `ScrollView`
    * in the screen is automatically adjusted.
    *

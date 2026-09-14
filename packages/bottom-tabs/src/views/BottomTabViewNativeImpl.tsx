@@ -29,6 +29,7 @@ import {
   type PlatformIconShared,
   Tabs,
   type TabsBottomAccessoryEnvironment,
+  type TabsBottomAccessoryEnvironmentChangeEvent,
   type TabSelectedEvent,
   type TabSelectionRejectedEvent,
   type TabsScreenItemStateAppearanceAndroid,
@@ -429,6 +430,9 @@ export function BottomTabViewNative({
 
   const bottomAccessory = currentOptions.bottomAccessory;
 
+  const onBottomAccessoryPlacementChange =
+    currentOptions.onBottomAccessoryPlacementChange;
+
   return (
     <SafeAreaProviderCompat
       style={{
@@ -457,6 +461,14 @@ export function BottomTabViewNative({
           bottomAccessory: bottomAccessory
             ? (environment: TabsBottomAccessoryEnvironment) =>
                 bottomAccessory({ placement: environment })
+            : undefined,
+          onBottomAccessoryEnvironmentChange: onBottomAccessoryPlacementChange
+            ? (
+                event: NativeSyntheticEvent<TabsBottomAccessoryEnvironmentChangeEvent>
+              ) =>
+                onBottomAccessoryPlacementChange({
+                  placement: event.nativeEvent.environment,
+                })
             : undefined,
           tabBarControllerMode,
           tabBarMinimizeBehavior,
